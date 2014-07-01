@@ -13,4 +13,12 @@ class UsersController < Devise::RegistrationsController
     @user.save
   end
 
+private
+
+      def configure_permitted_parameters
+        devise_parameter_sanitizer.for(:users) do |u|
+          u.permit(:name, :email, :image, :password, :password_confirmation, :uid, :provider)
+        end
+      end
+
 end

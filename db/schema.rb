@@ -73,7 +73,8 @@ ActiveRecord::Schema.define(version: 20140630151944) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
-    t.string   "udi"
+    t.string   "provider"
+    t.string   "uid"
     t.string   "name"
     t.string   "image"
   end
