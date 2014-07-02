@@ -1,18 +1,41 @@
 .jumbotron
   %p#notice= notice
-  %ul
-    - @places.businesses.each do |place|
-      %li
-        = place.name
-        %br/
-        = place.location.display_address
-    end
+
+  %p Choose your location - pick my location
+  .form-group
+  %label.control-label{for: "focusedInput"} Location
+  %input#focusedInput.form-control{type: "text", value: "Enter the address here..."}/
+
+  %p Choose your keyword: 
+  %button.btn.btn-default#all{type: "button"} All
+  %button.btn.btn-#hispter{type: "button"} Hipster
+  %button.btn.btn-default#vintage{type: "button"} Vintage
+  %button.btn.btn-default#hippie{type: "button"} Hippie
+  %button.btn.btn-default#posh{type: "button"} Posh
+  %button.btn.btn-default#art{type: "button"} Art
+  %button.btn.btn-default#landmarks{type: "button"} Landmarks
+  %button.btn.btn-default#markets{type: "button"} Markets
+  %button.btn.btn-default#fasion{type: "button"} Fashion
+  %button.btn.btn-default#geeks{type: "button"} Geeks
+
 
   :javascript
-    var address = window.locations = #{result_coords(@places).to_json};
+    var address = window.locations = #{result_coords(@places)["addresses"].to_json};
+    var names =  #{result_coords(@places)["names"].to_json};
 
   %address 
     / = address[1]
 
 
   #map_canvas
+
+  %button.btn.btn-default{type: "button"} Save map to favourites
+
+
+  / %ul
+  /   - @places.businesses.each do |place|
+  /     %li
+  /       = place.name
+  /       %br/
+  /       = place.location.display_address
+  /   end

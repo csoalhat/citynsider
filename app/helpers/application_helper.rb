@@ -7,11 +7,19 @@ module ApplicationHelper
   end
 
   def result_coords(results)
-    results.businesses.map do |result|
+    addresses = results.businesses.map do |result|
       puts result.location.display_address
       get_coords(result.location.display_address)
     end
 
+    names = results.businesses.map do |result|
+      result.name
+    end
+
+    {
+      "addresses" => addresses,
+      "names" => names
+    }
   end
 
 end
