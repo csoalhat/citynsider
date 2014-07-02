@@ -34,6 +34,8 @@ gem 'carrierwave', '0.9.0'
 gem "ransack"
 gem "omniauth-google-oauth2"
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'yelp', require: 'yelp'
+gem "geocoder"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

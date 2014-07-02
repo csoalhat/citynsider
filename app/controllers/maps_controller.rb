@@ -5,11 +5,15 @@ class MapsController < ApplicationController
   # GET /maps.json
   def index
     @maps = Map.all
+    @place = Yelp.client.search("nw34nx", { term: 'hispter', limit: 9, radius_filter: 1.2 })
   end
 
   # GET /maps/1
   # GET /maps/1.json
   def show
+    # @location = "nw34nx"
+    # @places = 
+    # @place = Yelp.client.search("nw34nx", { term: 'hispter' })
   end
 
   # GET /maps/new
