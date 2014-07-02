@@ -6,8 +6,13 @@
         = place.name
         %br/
         = place.location.display_address
+    end
 
   :javascript
-    window.locations = #{result_coords(@places).to_json}
+    var address = window.locations = #{result_coords(@places).to_json};
+
+  %address 
+    / = address[1]
+
 
   #map_canvas
