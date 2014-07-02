@@ -5,15 +5,37 @@ class MapsController < ApplicationController
   # GET /maps.json
   def index
     @maps = Map.all
-    @place = Yelp.client.search("nw34nx", { term: 'hispter', limit: 9, radius_filter: 1.2 })
+    @places = Yelp.client.search("nw34nx", { term: 'posh', filter_radius: 2, limit: 9})
+#     @directions= { origin: @places.businesses[0],
+#                   destination: @places.businesses[0],
+#                   waypoints: [
+#                     {
+#                       location: @places.businesses[1]
+#                     },{
+#                       location: @places.businesses[2]
+#                     },{
+#                       location: @places.businesses[3]
+#                     },{
+#                       location: @places.businesses[4]
+#                     },{
+#                       location: @places.businesses[5]
+#                     },{
+#                       location: @places.businesses[6]
+#                     },{
+#                       location: @places.businesses[7]
+#                     },{
+#                       location: @places.businesses[8]
+#                     }],
+#                   provideRouteAlternatives: false,
+#                   travelMode: TravelMode.WALKING,
+#                   unitSystem: UnitSystem.IMPERIAL
+# }
   end
 
   # GET /maps/1
   # GET /maps/1.json
   def show
-    # @location = "nw34nx"
-    # @places = 
-    # @place = Yelp.client.search("nw34nx", { term: 'hispter' })
+
   end
 
   # GET /maps/new

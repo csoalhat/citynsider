@@ -1,9 +1,13 @@
 .jumbotron
   %p#notice= notice
-/ each do
-  - place = @place.businesses[0]
-  - address = place.location.display_address.join(" ")
-  - latitude = get_coords(address)["lat"]
-  - longitude = get_coords(address)["lng"]
+  %ul
+    - @places.businesses.each do |place|
+      %li
+        = place.name
+        %br/
+        = place.location.display_address
+
+  :javascript
+    window.locations = #{result_coords(@places).to_json}
 
   #map_canvas

@@ -1,7 +1,17 @@
 module ApplicationHelper
-  def get_coords(address)
-    data = Geocoder.search(address).first.data
-    return data["geometry"]["location"]
+  def get_coords(location)
+    formatted_address = location.join(" ")
+
+    geocoder_result = Geocoder.search(formatted_address).first
+    geocoder_result.data["geometry"]["location"] if (geocoder_result && geocoder_result.data && geocoder_result.data["geometry"])
+  end
+
+  def result_coords(results)
+    results.businesses.map do |result|
+      puts result.location.display_address
+      get_coords(result.location.display_address)
+    end
+
   end
 
 end
