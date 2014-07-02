@@ -8,7 +8,7 @@
 
   %p Choose your keyword: 
   %button.btn.btn-default#all{type: "button"} All
-  %button.btn.btn-#hispter{type: "button"} Hipster
+  %button.btn.btn-#hipster{type: "button"} Hipster
   %button.btn.btn-default#vintage{type: "button"} Vintage
   %button.btn.btn-default#hippie{type: "button"} Hippie
   %button.btn.btn-default#posh{type: "button"} Posh
@@ -20,8 +20,9 @@
 
 
   :javascript
-    var address = window.locations = #{result_coords(@places)["addresses"].to_json};
-    var names =  #{result_coords(@places)["names"].to_json};
+    var names_and_addresses = window.locations = #{result_coords(@places).to_json};
+
+
 
   %address 
     / = address[1]

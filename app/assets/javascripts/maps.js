@@ -14,7 +14,7 @@ function initialise() {
   var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   // directionsDisplay.setMap(map);
 
-  addAllPins(map, address, names);
+  addAllPins(map, names_and_addresses);
 
   new google.maps.InfoWindow();
 };
@@ -46,10 +46,10 @@ function addMarker(map, position, name) {
 
 }
 
-function addAllPins(map, address, names) {
-  for (i=0; i<address.length; i++){ 
-    addMarker(map, address[i], names[i]);
-    console.log(address[i]);
+function addAllPins(map, names_and_addresses) {
+  for (i=0; i<names_and_addresses.length; i++){ 
+    addMarker(map, names_and_addresses[i].address, names_and_addresses[i].name);
+    
   }
 }
 
