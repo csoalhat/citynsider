@@ -1,6 +1,6 @@
 function initialise(data) {
 
-  if ((typeof data == 'undefined') || (typeof businesses_info == 'undefined')) {
+  if ((typeof data == 'undefined') && (typeof businesses_info == 'undefined')) {
     return false
   }
 
@@ -21,7 +21,12 @@ function initialise(data) {
   // directionsDisplay.setMap(map);
 
   addAllPins(map, data);
+  var firstDatum = data.shift();
+  var start = firstDatum.address.lat + "," + firstDatum.address.lng;
+  var end = start;
+  calcRoute(map, start, end, data);
 
+  
   new google.maps.InfoWindow();
 };
 
@@ -39,14 +44,17 @@ function updateMap(location, keyword) {
   // data = result.responseJSON;
   // console.log(data);
 
-  $.ajax
-    keyword: keyword
-    location: location; 
-    method = "POST";
-    dataType: "json"
-  
-  // initialize map with data from JSON request
-  initialise(keyword, location);
+  $.ajax({
+    data: { keyword: keyword, location: location}, 
+    url: '/maps.json',
+    type: "GET",
+    dataType: "JSON",
+    success: function(data, status, blah) { 
+      console.log(data);
+      console.log(status);
+      initialise(data);
+    }
+  })
 }
 
 function setupEventHandlers() {
@@ -77,18 +85,19 @@ function addMarker(map, position, name) {
   marker.setMap(map);
   map.setCenter(position);
 
-  var start = position;
-  var end = position;
-  var request = {
-    origin:start,
-    destination:end,
-    travelMode: google.maps.TravelMode.WALKING
-  };
-  directionsService.route(request, function(result, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(result);
-    }
-  });
+  // var start = position[0];
+  // var end = position[1];
+  // var request = {
+  //   origin:start,
+  //   destination:end,
+  //   waypoints
+  //   travelMode: google.maps.TravelMode.WALKING
+  // };
+  // directionsService.route(request, function(result, status) {
+  //   if (status == google.maps.DirectionsStatus.OK) {
+  //     directionsDisplay.setDirections(result);
+  //   }
+  // });
 
 }
 
@@ -99,22 +108,46 @@ function addAllPins(map, businesses_info) {
   }
 }
 
-// function calcRoute() {
-//   var start = london;
-//   var end = paris;
-//   var request = {
-//     origin:start,
-//     destination:end,
-//     travelMode: google.maps.TravelMode.WALKING
-//   };
-//   directionsService.route(request, function(result, status) {
-//     if (status == google.maps.DirectionsStatus.OK) {
-//       directionsDisplay.setDirections(result);
-//     }
-//   });
-// }
+function calcRoute(map, start, end, data) {
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  var waypts = [];
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+
+  for (var i = 0; i < data.length; i++) {
+    var location = data[i].address.lat + "," + data[i].address.lng;
+    waypts.push({
+        location:location,
+        stopover:true});
+  }
+
+  var request = {
+      origin: start,
+      destination: end,
+      waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+
 
 $(document).ready(function() {
   initialise();
   setupEventHandlers();
 });
+
+
+
+
+
+
+
+
+
