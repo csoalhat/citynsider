@@ -1,4 +1,10 @@
-function initialise() {
+function initialise(data) {
+
+  if ((typeof data == 'undefined') || (typeof businesses_info == 'undefined')) {
+    return false
+  }
+
+  data = data || businesses_info
 
   // var directionsDisplay;
   // var directionsService = new google.maps.DirectionsService();
@@ -14,14 +20,41 @@ function initialise() {
   var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   // directionsDisplay.setMap(map);
 
-  addAllPins(map, names_and_addresses);
+  addAllPins(map, data);
 
   new google.maps.InfoWindow();
 };
 
+function updateMap(location, keyword) {
+  // this will be the c;licked keyword button element
+  keyword = $(this).data("keyword");
+  location = $('#location').val();
+
+  console.log('This is your keyword: ' + keyword);
+  console.log('This is your location: ' + location);
+
+
+  // change to ajax post, submitting the location and keyword
+  // result = $.getJSON("http://localhost:3000/maps.json");
+  // data = result.responseJSON;
+  // console.log(data);
+
+  $.ajax
+    keyword: keyword
+    location: location; 
+    method = "POST";
+    dataType: "json"
+  
+  // initialize map with data from JSON request
+  initialise(keyword, location);
+}
+
+function setupEventHandlers() {
+  $('.keyword').on("click", updateMap)
+}
+
 
 function addMarker(map, position, name) {
-
   var icon = new google.maps.MarkerImage(
     "/assets/marker.png", //url
     new google.maps.Size(29, 50), //size
@@ -44,11 +77,24 @@ function addMarker(map, position, name) {
   marker.setMap(map);
   map.setCenter(position);
 
+  var start = position;
+  var end = position;
+  var request = {
+    origin:start,
+    destination:end,
+    travelMode: google.maps.TravelMode.WALKING
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(result);
+    }
+  });
+
 }
 
-function addAllPins(map, names_and_addresses) {
-  for (i=0; i<names_and_addresses.length; i++){ 
-    addMarker(map, names_and_addresses[i].address, names_and_addresses[i].name);
+function addAllPins(map, businesses_info) {
+  for (i=0; i<businesses_info.length; i++){ 
+    addMarker(map, businesses_info[i].address, businesses_info[i].name);
     
   }
 }
@@ -70,4 +116,5 @@ function addAllPins(map, names_and_addresses) {
 
 $(document).ready(function() {
   initialise();
+  setupEventHandlers();
 });

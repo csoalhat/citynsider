@@ -1,12 +1,20 @@
 class MapsController < ApplicationController
+
+  include ApplicationHelper
+
   before_action :set_map, only: [:show, :edit, :update, :destroy]
 
   # GET /maps
   # GET /maps.json
   def index
-    @maps = Map.all
-    @places = Yelp.client.search("nw34nx", { term: 'hipster', filter_radius: 2, limit: 9})
-
+    # @maps = Map.all
+    if params[:location] && params[:keyword]
+      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 2, limit: 9})
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @places ? result_coords(@places) : [] }
+    end
   end
 
   # GET /maps/1
@@ -40,19 +48,19 @@ class MapsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /maps/1
-  # PATCH/PUT /maps/1.json
-  def update
-    respond_to do |format|
-      if @map.update(map_params)
-        format.html { redirect_to @map, notice: 'Map was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @map.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /maps/1
+  # # PATCH/PUT /maps/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @map.update(map_params)
+  #       format.html { redirect_to @map, notice: 'Map was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: 'edit' }
+  #       format.json { render json: @map.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /maps/1
   # DELETE /maps/1.json
