@@ -24,7 +24,12 @@ CityNsider1::Application.routes.draw do
 
   root 'maps#index'
 
+  # get '/users/:user_id/profile', to: "profiles#show", as: :user_profile
 
+  get :profile,        to: "profiles#show",   as: :current_user_profile
+  get "/users/:user_id/favorites", to: "favorites#index",   as: :user_favorites
+  get '/profile/edit', to: "profiles#edit",   as: :edit_current_user_profile
+  put '/profile',      to: "profiles#update", as: :update_current_user_profile
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -9,7 +9,7 @@ class MapsController < ApplicationController
   def index
     # @maps = Map.all
     if params[:location] && params[:keyword]
-      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 2, limit: 9})
+      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.2, limit: 8})
     end
     respond_to do |format|
       format.html

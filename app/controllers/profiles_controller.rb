@@ -10,6 +10,14 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = if params[:user_id]
+      User.find(params[:user_id])
+    elsif current_user
+      current_user
+    else
+      authenticate_user!
+    end
+    @profile = @user.profile
   end
 
   # GET /profiles/new
@@ -19,6 +27,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    @profile = current_user.profile
   end
 
   # POST /profiles
@@ -40,9 +49,10 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    @profile = current_user.profile
     respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+      if @profile.update_attributes(params.require(:profile).permit(:name, :city, :description, :image, :public))
+        format.html { redirect_to current_user_profile_path, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,11 +74,17 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = if params[:id]
+        Profile.find(params[:id])
+      else
+        current_user.profile
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params[:profile]
     end
+
+
 end

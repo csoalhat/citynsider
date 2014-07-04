@@ -6,5 +6,23 @@
         - @profile.errors.full_messages.each do |msg|
           %li= msg
 
+= form_for @profile, url: update_current_user_profile_path, method: :put do |f|
+  .field
+    .category Name:
+    = f.text_field :name
+  .field
+    .category City:
+    = f.text_field :city
+  .field
+    .category Short bio:
+    = f.text_field :description
+  .field
+    .category Profile picture:
+    = f.file_field :image
+  .field
+    .category Privacy:
+    = f.check_box :public
+  %br
   .actions
     = f.submit 'Save'
+

@@ -36,6 +36,7 @@ gem "omniauth-google-oauth2"
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'yelp', require: 'yelp'
 gem "geocoder"
+gem 'cancan'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -45,8 +46,8 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'better_errors'
-  gem "binding_of_caller"
+  # gem 'better_errors'
+  # gem "binding_of_caller"
 end
 
 # Use ActiveModel has_secure_password

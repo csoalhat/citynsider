@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :maps
 
+  after_create :create_profile
+  
   def self.find_for_google_oauth2(auth, signed_in_user=nil)
     if user = signed_in_user || User.find_by_email(auth.info.email)
       user.provider = auth.provider
@@ -38,6 +40,10 @@ class User < ActiveRecord::Base
         # user.skip_confirmation!
       end
     end
+  end
+
+  def role?(role)
+    self.role.to_s == role.to_s
   end
 
 end

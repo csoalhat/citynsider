@@ -2,13 +2,10 @@ function initialise(data) {
 
   if ((typeof data == 'undefined') && (typeof businesses_info == 'undefined')) {
     return false
+  //
   }
 
   data = data || businesses_info
-
-  // var directionsDisplay;
-  // var directionsService = new google.maps.DirectionsService();
-  // var map;
 
   var mapOptions = {
     center: new google.maps.LatLng(51.5, -0.1),
@@ -16,9 +13,7 @@ function initialise(data) {
     styles: [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#acbcc9'}]},{'featureType':'landscape','stylers':[{'color':'#f2e5d4'}]},{'featureType':'road.highway','elementType':'geometry','stylers':[{'color':'#c5c6c6'}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#e4d7c6'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#fbfaf7'}]},{'featureType':'poi.park','elementType':'geometry','stylers':[{'color':'#c5dac6'}]},{'featureType':'administrative','stylers':[{'visibility':'on'},{'lightness':33}]},{'featureType':'road'},{'featureType':'poi.park','elementType':'labels','stylers':[{'visibility':'on'},{'lightness':20}]},{},{'featureType':'road','stylers':[{'lightness':20}]}]
   };
 
-  // var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
   var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-  // directionsDisplay.setMap(map);
 
   addAllPins(map, data);
   var firstDatum = data.shift();
@@ -31,18 +26,11 @@ function initialise(data) {
 };
 
 function updateMap(location, keyword) {
-  // this will be the c;licked keyword button element
   keyword = $(this).data("keyword");
   location = $('#location').val();
 
   console.log('This is your keyword: ' + keyword);
   console.log('This is your location: ' + location);
-
-
-  // change to ajax post, submitting the location and keyword
-  // result = $.getJSON("http://localhost:3000/maps.json");
-  // data = result.responseJSON;
-  // console.log(data);
 
   $.ajax({
     data: { keyword: keyword, location: location}, 
@@ -85,20 +73,6 @@ function addMarker(map, position, name) {
   marker.setMap(map);
   map.setCenter(position);
 
-  // var start = position[0];
-  // var end = position[1];
-  // var request = {
-  //   origin:start,
-  //   destination:end,
-  //   waypoints
-  //   travelMode: google.maps.TravelMode.WALKING
-  // };
-  // directionsService.route(request, function(result, status) {
-  //   if (status == google.maps.DirectionsStatus.OK) {
-  //     directionsDisplay.setDirections(result);
-  //   }
-  // });
-
 }
 
 function addAllPins(map, businesses_info) {
@@ -114,12 +88,13 @@ function calcRoute(map, start, end, data) {
   var waypts = [];
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
+  directionsDisplay.setOptions( { suppressMarkers: true } );
 
   for (var i = 0; i < data.length; i++) {
     var location = data[i].address.lat + "," + data[i].address.lng;
     waypts.push({
         location:location,
-        stopover:true});
+        stopover:false});
   }
 
   var request = {

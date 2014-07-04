@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title CityNsider1
+    %title City'nsider
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
@@ -19,7 +19,7 @@
           %li.active
             %a= link_to 'Home', maps_path
           %li
-            %a= link_to 'Profile', profiles_path
+            %a= link_to 'Profile', current_user_profile_path
           %li
             %a= link_to 'Popular Maps', maps_path 
           %li

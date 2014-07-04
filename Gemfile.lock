@@ -38,17 +38,13 @@ GEM
     acts_as_votable (0.10.0)
     arel (4.0.2)
     bcrypt (3.1.7)
-    better_errors (1.1.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.1.4)
     byebug (2.7.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
+    cancan (1.6.10)
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -62,7 +58,6 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.8.9)
-    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -199,9 +194,8 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
-  better_errors
-  binding_of_caller
   bootstrap-sass (~> 3.1.1)
+  cancan
   carrierwave (= 0.9.0)
   coffee-rails (~> 4.0.0)
   devise
