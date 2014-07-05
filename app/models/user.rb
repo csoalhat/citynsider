@@ -1,0 +1,51 @@
+class User < ActiveRecord::Base
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable
+
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  after_create :create_profile
+    
+    def self.find_for_google_oauth2(auth, signed_in_user=nil)
+      if user = signed_in_user || User.find_by_email(auth.info.email)
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name if user.name.blank?
+        user.image = auth.info.image if user.image.blank?
+        user.save
+        user
+      else
+        where(auth.slice(:provider, :uid)).first_or_create do |user|
+          user.provider = auth.provider
+          user.uid = auth.uid
+          user.name = auth.info.name
+          user.image = auth.info.image
+          user.email = auth.info.email
+          # user.password = Devise.friendly_token[0, 20]
+          # user.skip_confirmation!
+        end
+      end
+    end
+
+    def self.new_with_session(params, session)
+      super.tap do |user|
+        if auth = session["devise.google_data"]
+          user.name = auth.info.name if user.name.blank?
+          user.image = auth.info.image if user.image.blank?
+          user.email = auth.info.email if user.email.blank?
+          # user.skip_confirmation!
+        end
+      end
+    end
+
+    def role?(role)
+      self.role.to_s == role.to_s
+    end
+
+  end
+
+

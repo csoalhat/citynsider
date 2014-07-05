@@ -1,0 +1,38 @@
+.jumbotron
+  - if current_user == @user
+    .bt= link_to 'Edit', edit_current_user_profile_path
+  %p#notice= notice
+  .col-xs-5
+    #{@user.profile.name}
+    %br 
+    #{@user.profile.city}
+    %br
+    #{@user.profile.description}
+    / = image_tag(@user.profile.photo, width: '200')
+    .row
+      %br
+      .btn-group.btn-group-justified
+        %a.btn.btn-default{href: "#"} All Maps
+        %a.btn.btn-default{href: "#"} #{@user.profile.name}'s Maps
+        %a.btn.btn-default{href: "#"} #{@user.profile.name}'s Favorite Maps
+
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th User
+            %th Map's name
+            %th Rating
+        %tbody
+          / %tr
+          / - @user.profile.favorites.each do |favorite|
+          /   %td - favorite.name
+          /   %td - favorite.user.name
+          /   / %td - favorite.vote
+         
+        .col-xs-7
+          This is the maps
+    
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path
