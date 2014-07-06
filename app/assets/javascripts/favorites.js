@@ -1,9 +1,3 @@
-// user enters address - name - description - photo
-// adds markers on the map
-// user can drag the markers 
-// user can draw path 
-
-
 function initialise(data) {
 
   if ((typeof data == 'undefined') && (typeof businesses_info == 'undefined')) {
@@ -40,7 +34,7 @@ function updateMap(location, keyword) {
 
   $.ajax({
     data: { keyword: keyword, location: location}, 
-    url: '/maps.json',
+    url: '/favorites.json',
     type: "GET",
     dataType: "JSON",
     success: function(data, status, blah) { 
@@ -107,7 +101,7 @@ function calcRoute(map, start, end, data) {
       origin: start,
       destination: end,
       waypoints: waypts,
-      optimizeWaypoints: false,
+      optimizeWaypoints: true,
       travelMode: google.maps.TravelMode.WALKING
   };
   directionsService.route(request, function(response, status) {
@@ -116,6 +110,7 @@ function calcRoute(map, start, end, data) {
     }
   });
 }
+
 
 
 $(document).ready(function() {

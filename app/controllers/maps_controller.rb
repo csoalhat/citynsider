@@ -4,7 +4,14 @@ class MapsController < ApplicationController
   # GET /maps
   # GET /maps.json
   def index
-    @maps = Map.all
+    # if params[:location] && params[:keyword]
+    #   @places = user addresses
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @places ? result_coords(@places) : [] }
+    end
+  end
   end
 
   # GET /maps/1
