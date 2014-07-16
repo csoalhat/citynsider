@@ -18,7 +18,11 @@ class FavoritesControllerTest < ActionController::TestCase
 
   test "should create favorite" do
     assert_difference('Favorite.count') do
+<<<<<<< HEAD
       post :create, favorite: {  }
+=======
+      post :create, favorite: { coordinates: @favorite.coordinates, description: @favorite.description, name: @favorite.name, profile_id: @favorite.profile_id }
+>>>>>>> af718d06b7796068f5d4375c5428c5812847d38e
     end
 
     assert_redirected_to favorite_path(assigns(:favorite))
@@ -35,7 +39,11 @@ class FavoritesControllerTest < ActionController::TestCase
   end
 
   test "should update favorite" do
+<<<<<<< HEAD
     patch :update, id: @favorite, favorite: {  }
+=======
+    patch :update, id: @favorite, favorite: { coordinates: @favorite.coordinates, description: @favorite.description, name: @favorite.name, profile_id: @favorite.profile_id }
+>>>>>>> af718d06b7796068f5d4375c5428c5812847d38e
     assert_redirected_to favorite_path(assigns(:favorite))
   end
 

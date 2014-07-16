@@ -50,7 +50,7 @@ function setupEventHandlers() {
 }
 
 
-function addMarker(map, position, name) {
+function addMarker(map, position, name, display_address) {
   var icon = new google.maps.MarkerImage(
     "/assets/marker.png", //url
     new google.maps.Size(29, 50), //size
@@ -66,7 +66,7 @@ function addMarker(map, position, name) {
   infoWindow = new google.maps.InfoWindow();
     google.maps.event.addListener(marker, 'click', function() {
       if(infoWindow != undefined) infoWindow.close();
-      infoWindow.setContent("<p>" + name + "</p>");
+      infoWindow.setContent("<p>" + name + "<br>" + display_address + "</p>");
       infoWindow.open(map,marker);
    });
 
@@ -77,7 +77,8 @@ function addMarker(map, position, name) {
 
 function addAllPins(map, businesses_info) {
   for (i=0; i<businesses_info.length; i++){ 
-    addMarker(map, businesses_info[i].address, businesses_info[i].name);
+    addMarker(map, businesses_info[i].address, businesses_info[i].name, businesses_info[i].display_address);
+
     
   }
 }
@@ -110,7 +111,6 @@ function calcRoute(map, start, end, data) {
     }
   });
 }
-
 
 
 $(document).ready(function() {

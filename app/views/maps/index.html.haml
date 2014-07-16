@@ -1,22 +1,25 @@
 .jumbotron
   %p#notice= notice
 
-  %p Choose your location - pick my location
+  %p Postcode:
   .form-group
   %label.control-label{for: "focusedInput"} Location
   %input#focusedInput.form-control#location{type: "text", placeholder: "Postcode"}/
 
-  %p Choose your keyword: 
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
-  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
+
+  %p Tribe:
+  .btn-group.btn-group-justified.btn-group
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
+
 
   - if @place
     :javascript
@@ -28,13 +31,6 @@
 
   #map_canvas
 
-  %button.btn.btn-default{type: "button"} Save map to favourites
+/   %button.btn.btn-default{type: "button"} Save map to favourites
+  #map_canvas
 
-
-  / %ul
-  /   - @places.businesses.each do |place|
-  /     %li
-  /       = place.name
-  /       %br/
-  /       = place.location.display_address
-  /   end

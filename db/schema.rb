@@ -13,53 +13,23 @@
 
 ActiveRecord::Schema.define(version: 20140704143212) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "favorites", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "profile_id"
-    t.integer  "map_id"
-    t.string   "name"
-  end
-
-  create_table "friendships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
-  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "maps", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "keyword"
-    t.string   "mapcenter"
-    t.boolean  "yelp_generated"
-    t.integer  "user_id"
-  end
-
-  create_table "profiles", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "coordinates"
     t.string   "name"
-    t.string   "city"
     t.string   "description"
-    t.string   "photo"
     t.integer  "user_id"
     t.boolean  "public",      default: true, null: false
   end
 
-  create_table "tips", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "profile_id"
-    t.integer  "map_id"
-  end
+
+  add_index "maps", ["profile_id"], name: "index_maps_on_profile_id", using: :btree
+  add_index "maps", ["user_id"], name: "index_maps_on_user_id", using: :btree
+
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -84,19 +54,5 @@ ActiveRecord::Schema.define(version: 20140704143212) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "votes", force: true do |t|
-    t.integer  "votable_id"
-    t.string   "votable_type"
-    t.integer  "voter_id"
-    t.string   "voter_type"
-    t.boolean  "vote_flag"
-    t.string   "vote_scope"
-    t.integer  "vote_weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

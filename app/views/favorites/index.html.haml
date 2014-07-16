@@ -1,17 +1,28 @@
-%h1 Listing favorites
+.jumbotron
+  %p#notice= notice
 
-%table
-  %tr
-    %th
-    %th
-    %th
+  %p Choose your location - pick my location
+  .form-group
+  %label.control-label{for: "focusedInput"} Location
+  %input#focusedInput.form-control#location{type: "text", placeholder: "Postcode"}/
 
-  - @favorites.each do |favorite|
-    %tr
-      %td= link_to 'Show', favorite
-      %td= link_to 'Edit', edit_favorite_path(favorite)
-      %td= link_to 'Destroy', favorite, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %p Choose your keyword: 
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
+  %button.btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
 
-%br
+  - if @place
+    :javascript
+      var businesses_info = window.locations = #{result_coords(@places).to_json};
 
-= link_to 'New Favorite', new_favorite_path
+
+  #map_canvas
+
+  %button.btn.btn-default{type: "button"} Save map to favourites

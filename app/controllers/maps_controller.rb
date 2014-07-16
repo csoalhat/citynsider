@@ -7,15 +7,17 @@ class MapsController < ApplicationController
   # GET /maps
   # GET /maps.json
   def index
-    # @maps = Map.all
+
     if params[:location] && params[:keyword]
-      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.2, limit: 8})
+      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.03, limit: 7})
     end
     respond_to do |format|
       format.html
       format.json { render json: @places ? result_coords(@places) : [] }
     end
   end
+
+
 
   # GET /maps/1
   # GET /maps/1.json
@@ -72,6 +74,28 @@ class MapsController < ApplicationController
     end
   end
 
+
+    def get_coords(location)
+    formatted_address = location.join(" ")
+
+    geocoder_result = Geocoder.search(formatted_address).first
+    geocoder_result.data["geometry"]["location"] if (geocoder_result && geocoder_result.data && geocoder_result.data["geometry"])
+  end
+
+  def result_coords(results)
+    results.businesses.map do |result|
+      puts result.location.display_address
+      address = get_coords(result.location.display_address)
+      name = result.name
+      display_address = result.location.display_address
+    { "name" => name,
+      "address" => address,
+      "display_address" => display_address
+    }
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_map
@@ -80,6 +104,7 @@ class MapsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def map_params
-      params[:map]
+      params.require(:map).permit(:coordinates, :name, :description, :user_id, :profile_id)
     end
+
 end
