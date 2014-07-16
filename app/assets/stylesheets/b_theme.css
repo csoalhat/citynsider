@@ -2809,25 +2809,17 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
   background-color: #0E90D2;
   border-color: #0E90D2;
 }
 .btn-default .badge {
   color: #0E90D2;
-=======
->>>>>>> fef5302496c88cec5fc7cf0eac7b808a373a3dcb
   background-color: #95a5a6;
   border-color: #95a5a6;
 }
 .btn-default .badge {
   color: #95a5a6;
-<<<<<<< HEAD
-=======
->>>>>>> af718d06b7796068f5d4375c5428c5812847d38e
->>>>>>> fef5302496c88cec5fc7cf0eac7b808a373a3dcb
   background-color: #ffffff;
 }
 .btn-primary {
