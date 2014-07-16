@@ -53,5 +53,6 @@ production:
   adapter: postgresql
   encoding: unicode
   database: city_nsider_1_production
+
   pool: 5
 

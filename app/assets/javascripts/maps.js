@@ -112,7 +112,6 @@ function calcRoute(map, start, end, data) {
 }
 
 
-
 $(document).ready(function() {
   initialise();
   setupEventHandlers();

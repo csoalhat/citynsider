@@ -28,7 +28,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+<<<<<<< HEAD
 
+=======
+gem 'devise'
+>>>>>>> af718d06b7796068f5d4375c5428c5812847d38e
 gem 'haml-rails'
 gem 'carrierwave', '0.9.0'
 gem "ransack"

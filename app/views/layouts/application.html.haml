@@ -10,6 +10,40 @@
     .navbar.navbar-default
       .navbar-header
         %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", type: "button"}
+<<<<<<< HEAD
+=======
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand= link_to "City'nsider", new_map_path
+      .navbar-collapse.collapse.navbar-responsive-collapse
+        %ul.nav.navbar-nav
+          %li.active
+            %a= link_to 'Home', maps_path
+          %li
+            %a= link_to 'Profile', current_user_profile_path
+          %li
+            %a= link_to 'Popular Maps', maps_path 
+          %li
+            %a= link_to 'Show Friends', friendships_path
+
+        %ul.nav.navbar-nav.navbar-right
+          
+          - if user_signed_in?
+            %li
+              / %a= link_to 'Edit Profile', edit_profiles_path
+            %li
+              %a= link_to 'Settings', edit_user_registration_path
+            %li
+              %a= link_to 'Logout', destroy_user_session_path, method: :delete
+          - else    
+            %li
+              %a= link_to 'Login with Google', user_omniauth_authorize_path(:google_oauth2)
+            %li
+              %a= link_to 'Sign up', new_user_registration_path
+            %li
+              %a= link_to 'Login', new_user_session_path
+>>>>>>> af718d06b7796068f5d4375c5428c5812847d38e
 
   .container
     = yield

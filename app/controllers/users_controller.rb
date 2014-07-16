@@ -27,4 +27,5 @@ class UsersController < Devise::RegistrationsController
 #     new_profile_path
 #   end
 
+
 end

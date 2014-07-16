@@ -14,6 +14,7 @@ class MapsController < ApplicationController
   end
 
 
+
   # GET /maps/1
   # GET /maps/1.json
   def show
@@ -68,6 +69,7 @@ class MapsController < ApplicationController
     end
   end
 
+
     def get_coords(location)
     formatted_address = location.join(" ")
 
@@ -88,6 +90,7 @@ class MapsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_map
@@ -98,6 +101,5 @@ class MapsController < ApplicationController
     def map_params
       params.require(:map).permit(:coordinates, :name, :description, :user_id, :profile_id)
     end
-
 
 end
