@@ -28,12 +28,15 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'devise'
+
 gem 'haml-rails'
 gem 'carrierwave', '0.9.0'
 gem "ransack"
 gem "omniauth-google-oauth2"
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'yelp', require: 'yelp'
+gem "geocoder"
+gem 'cancan'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

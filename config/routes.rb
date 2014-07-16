@@ -1,28 +1,28 @@
 CityNsider1::Application.routes.draw do
+ #  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout'}, :controllers => {:registrations => 'users',
+ # omniauth_callbacks: "omniauth_callbacks"}
+  
+  # resources :friendships
 
-  resources :tips
-
-  resources :ratings
-
-  resources :places
-
-  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout'}, :controllers => {:registrations => 'users',
- omniauth_callbacks: "omniauth_callbacks"}
-  resources :friendships
-
-  resources :favorites
+  # resources :favorites
 
   resources :maps
 
-  resources :profiles
+  # resources :profiles
 
-  get "user/profile"
-  get "user/friendship"
-  get "user/map"
-  get "user/favorite"
-  get "user/place"
+  # get "user/profile"
+  # get "user/friendship"
+  # get "user/map"
+  # get "user/favorite"
 
   root 'maps#index'
+
+  # get '/users/:user_id/profile', to: "profiles#show", as: :user_profile
+
+  # get :profile,        to: "profiles#show",   as: :current_user_profile
+  # get "/users/:user_id/favorites", to: "favorites#index",   as: :user_favorites
+  # get '/profile/edit', to: "profiles#edit",   as: :edit_current_user_profile
+  # put '/profile',      to: "profiles#update", as: :update_current_user_profile
 
 
   # The priority is based upon order of creation: first created -> highest priority.

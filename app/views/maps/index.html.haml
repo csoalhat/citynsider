@@ -1,17 +1,130 @@
-%h1 Listing maps
+.jumbotron
+  %p#notice= notice
 
-%table
-  %tr
-    %th
-    %th
-    %th
+  %p Postcode:
+  .form-group
+  %label.control-label{for: "focusedInput"} Location
+  %input#focusedInput.form-control#location{type: "text", placeholder: "Postcode"}/
 
-  - @maps.each do |map|
-    %tr
-      %td= link_to 'Show', map
-      %td= link_to 'Edit', edit_map_path(map)
-      %td= link_to 'Destroy', map, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %p Tribe:
+  .btn-group.btn-group-justified.btn-group
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
+    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
 
-%br
+  - if @place
+    :javascript
+      var businesses_info = window.locations = #{result_coords(@places).to_json};
 
-= link_to 'New Map', new_map_path
+  #map_canvas
+
+
+/   <!DOCTYPE html>
+/ <html>
+/   <head>
+/     <title>City'nsider</title>
+/     <link data-turbolinks-track="true" href="/assets/application.css?body=1" media="all" rel="stylesheet" />
+/     <link data-turbolinks-track="true" href="/assets/b_theme.css?body=1" media="all" rel="stylesheet" />
+/     <link data-turbolinks-track="true" href="/assets/bootstrap_custom.css?body=1" media="all" rel="stylesheet" />
+/     <script data-turbolinks-track="true" src="/assets/jquery.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/affix.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/alert.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/button.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/carousel.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/collapse.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/dropdown.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/tab.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/transition.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/scrollspy.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/modal.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/tooltip.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap/popover.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/bootstrap.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/turbolinks.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/directions.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/maps.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/maps_test.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/profile.js?body=1"></script>
+/     <script data-turbolinks-track="true" src="/assets/application.js?body=1"></script>
+/     <meta content="authenticity_token" name="csrf-param" />
+/     <meta content="wIUrv9iXP0KtqObiQvm5dmdyxtLxDOHvmAPV6rz6h/Y=" name="csrf-token" />
+/     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCRcbP5XDgjl6ESmSrSDpSNdGwShDgMe8M&amp;sensor=false' type='text/javascript'></script>
+/   </head>
+/   <body>
+/     <div class='navbar navbar-default'>
+/       <div class='navbar-header'>
+/         <button class='navbar-toggle' data-target='.navbar-responsive-collapse' data-toggle='collapse' type='button'></button>
+/       </div>
+/       <!-- %span.icon-bar -->
+/       <!-- %span.icon-bar -->
+/       <!-- %span.icon-bar -->
+/       <!-- %a.navbar-brand= link_to "City'nsider", new_map_path -->
+/       <!--  l      -->
+/       <!-- %ul.nav.navbar-nav -->
+/       <!-- %li.active -->
+/       <!-- %a= link_to 'Home', maps_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Profile', current_user_profile_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Popular Maps', maps_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Show Friends', friendships_path -->
+/       <!-- %ul.nav.navbar-nav.navbar-right -->
+/       <!-- - if user_signed_in? -->
+/       <!-- %li -->
+/       <!-- / %a= link_to 'Edit Profile', edit_profiles_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Settings', edit_user_registration_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Logout', destroy_user_session_path, method: :delete -->
+/       <!-- - else -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Login with Google', user_omniauth_authorize_path(:google_oauth2) -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Sign up', new_user_registration_path -->
+/       <!-- %li -->
+/       <!-- %a= link_to 'Login', new_user_session_path -->
+/     </div>
+/   </body>
+/   <div class='container'>
+/     <div class='jumbotron'>
+/       <p id='notice'></p>
+/       <h4>Postcode</h4>
+/       <div class='form-group'></div>
+/       <input class='form-control' id='location' placeholder='Postcode' type='text'>
+/       <h4>Tribe</h4>
+/       <div class='btn-group btn-group-justified'></div>
+/       <div class='btn-group'>
+/         <button class='btn btn-default keyword' data-keyword='' type='button'>All</button>
+/         <button class='btn btn-default keyword' data-keyword='hipsters' type='button'>Hipster</button>
+/         <button class='btn btn-default keyword' data-keyword='vintage' type='button'>Vintage</button>
+/         <button class='btn btn-default keyword' data-keyword='hippie' type='button'>Hippie</button>
+/         <button class='btn btn-default keyword' data-keyword='posh' type='button'>Posh</button>
+/         <button class='btn btn-default keyword' data-keyword='artists' type='button'>Art</button>
+/         <button class='btn btn-default keyword' data-keyword='landmarks' type='button'>Landmarks</button>
+/         <button class='btn btn-default keyword' data-keyword='markets' type='button'>Markets</button>
+/         <button class='btn btn-default keyword' data-keyword='fashion' type='button'>Fashion</button>
+/         <button class='btn btn-default keyword' data-keyword='geeks' type='button'>Geeks</button>
+/       </div>
+/       <!-- %address -->
+/       <!-- / = address[1] -->
+/       <div id='map_canvas'></div>
+/       <!-- %button.btn.btn-default{type: "button"} Save map to favourites -->
+/       <!-- %ul -->
+/       <!-- - @places.businesses.each do |place| -->
+/       <!-- %li -->
+/       <!-- = place.name -->
+/       <!-- %br/ -->
+/       <!-- = place.location.display_address -->
+/       <!-- end -->
+/     </div>
+/   </div>
+/ </html>
