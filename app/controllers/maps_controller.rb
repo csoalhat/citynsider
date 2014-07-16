@@ -75,7 +75,7 @@ class MapsController < ApplicationController
   end
 
 
-    def get_coords(location)
+  def get_coords(location)
     formatted_address = location.join(" ")
 
     geocoder_result = Geocoder.search(formatted_address).first

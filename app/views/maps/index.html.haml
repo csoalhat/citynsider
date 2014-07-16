@@ -2,10 +2,10 @@
   %p#notice= notice
 
   %p Postcode:
-  .form-group
-  %label.control-label{for: "focusedInput"} Location
+  / .form-group
+  / %label.control-label{for: "focusedInput"}
   %input#focusedInput.form-control#location{type: "text", placeholder: "Postcode"}/
-
+  %br
 
   %p Tribe:
   .btn-group.btn-group-justified.btn-group
@@ -25,12 +25,7 @@
     :javascript
       var businesses_info = window.locations = #{result_coords(@places).to_json};
 
-  %address 
-    / = address[1]
-
-
   #map_canvas
 
-/   %button.btn.btn-default{type: "button"} Save map to favourites
-  #map_canvas
+
 
