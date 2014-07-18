@@ -8,8 +8,9 @@ gem 'rails', '4.0.5'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '~> 3.1.1'
-gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
+gem 'bootstrap-sass'
+# gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
+gem "sass-rails"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -39,6 +40,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'yelp', require: 'yelp'
 gem "geocoder"
 gem 'cancan'
+gem 'flickraw'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
