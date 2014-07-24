@@ -52,7 +52,7 @@ function setupEventHandlers() {
 
 function addMarker(map, position, name, display_address) {
   var icon = new google.maps.MarkerImage(
-    "/assets/marker.png", //url
+    "http://i.imgur.com/8WBxH7T.png", //url
     new google.maps.Size(29, 50), //size
     new google.maps.Point(0,0) //origin
   );
