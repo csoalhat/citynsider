@@ -17,7 +17,7 @@ module ApplicationHelper
       # categories = result.categories
     { "name" => name,
       "address" => address,
-      "display_address" => display_address,
+      "display_address" => display_address
     }
     end
   end
