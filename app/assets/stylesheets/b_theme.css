@@ -3,7 +3,7 @@
 
 #map_canvas {
   display: inline-block;
-  width: 120%;
+  width: 110%;
   height: 500px;
   display: none;
   margin-left: -40px;
@@ -6483,3 +6483,7 @@ a.hover {
 #map_canvas {
   background: transparent url(http://i.imgur.com/apeAjlV.gif) no-repeat center center;
   }
+
+.info{
+
+}

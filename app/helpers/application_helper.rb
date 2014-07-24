@@ -13,9 +13,11 @@ module ApplicationHelper
       address = get_coords(result.location.display_address)
       name = result.name
       display_address = result.location.display_address
+      snippet = result.snippet_text
+      # categories = result.categories
     { "name" => name,
       "address" => address,
-      "display_address" => display_address
+      "display_address" => display_address,
     }
     end
   end
