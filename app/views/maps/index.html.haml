@@ -37,30 +37,11 @@
     %a.keyword{:type => "button", :data => {'keyword' => ''}} all the tribes 
     around here!
 
-    / .btn-group.btn-group-justified.btn-group
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
-    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
-
 
     - if @place
       :javascript
         var businesses_info = window.locations = #{result_coords(@places).to_json};
 
-#map_canvas
-
-           
-  /     #searchbox 
-  /       %input#focusedInput.form-control#location{type: "text", placeholder: "in this area (postcode)"}/
-  /       .btn.submit Submit
-
-
+  #map_canvas
 
 

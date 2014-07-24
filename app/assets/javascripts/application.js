@@ -25,7 +25,8 @@ $(document).ready(function(){
    $(".keyword").on("click", function(event){
     keyword = $(this).data("keyword");
       $("#second").hide();
-      $("#find").html("Great! Let's find the " + keyword + "! The map can take a few seconds to load.")
+      $("#map_canvas").show();
+      // $("#find").html("Great! Let's find the " + keyword + "! The map can take a few seconds to load.")
       console.log("this worked! this is the keyword " + keyword );
     });
 
