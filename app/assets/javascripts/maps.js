@@ -110,7 +110,10 @@ function calcRoute(map, start, end, data) {
       directionsDisplay.setDirections(response);
     }
   });
+
 }
+
+
 
 
 $(document).ready(function() {

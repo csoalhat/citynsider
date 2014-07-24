@@ -1,31 +1,64 @@
 .jumbotron
   %p#notice= notice
+  %span#first
+    .text Start by telling us where you would like to explore 
+    .italic (the more specific the better! A tube station or a postcode would be ideal!)
+    %span
+      %input#focusedInput.form-control#location{type: "text"}
+      %br
+      .btn.btn-default#next Next
+    %br
 
-  %p Postcode:
-  / .form-group
-  / %label.control-label{for: "focusedInput"}
-  %input#focusedInput.form-control#location{type: "text", placeholder: "Postcode"}/
-  %br
+  %span#second
+    #area
+    Do you want to hang out with 
+    %a.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} the hipsters?
+    Or maybe you prefer something more
+    %a.keyword{:type => "button", :data => {'keyword' => 'vintage'}} vintage?
+    %br
+    There are also some pretty cool
+    %a.keyword{:type => "button", :data => {'keyword' => 'hippie'}} hippies,
+    and 
+    %a.keyword{:type => "button", :data => {'keyword' => 'artists'}} artists.
+    You can also check out all the
+    %a.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} graffitis and pretty buildings
+    and the
+    %a.keyword{:type => "button", :data => {'keyword' => 'markets'}} flea markets.
+    %br
+    If you want to buy clothes, check out the
+    %a.keyword{:type => "button", :data => {'keyword' => 'fashion'}} fashionistas
+    shop in the area. The 
+    %a.keyword{:type => "button", :data => {'keyword' => 'posh'}}  posh
+    people also have pretty cool stores. 
+    %br
+    Can't make up your mind? Let's see  
+    %a.keyword{:type => "button", :data => {'keyword' => ''}} all the tribes 
+    around here!
 
-  %p Tribe:
-  .btn-group.btn-group-justified.btn-group
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
-    .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
+    / .btn-group.btn-group-justified.btn-group
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => ''}}  All
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hipsters'}} Hipster
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'vintage'}} Vintage
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'hippie'}} Hippie
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'posh'}} Posh
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'artists'}} Art
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'landmarks'}} Landmarks
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'markets'}} Markets
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'fashion'}} Fashion
+    /   .btn.btn-default.keyword{:type => "button", :data => {'keyword' => 'geeks'}} Geeks
 
 
-  - if @place
-    :javascript
-      var businesses_info = window.locations = #{result_coords(@places).to_json};
-      
-  #map_canvas
+    - if @place
+      :javascript
+        var businesses_info = window.locations = #{result_coords(@places).to_json};
+
+    #map_canvas
+
+           
+  /     #searchbox 
+  /       %input#focusedInput.form-control#location{type: "text", placeholder: "in this area (postcode)"}/
+  /       .btn.submit Submit
+
 
 
 

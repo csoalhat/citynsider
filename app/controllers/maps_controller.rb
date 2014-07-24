@@ -9,7 +9,7 @@ class MapsController < ApplicationController
   def index
 
     if params[:location] && params[:keyword]
-      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.03, limit: 7})
+      @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.03, limit: 6})
       # @flickr = flickr.photos.getRecent{tags = "hipster", lat = 51.684477 , lon = -0.021973 }
     end
     respond_to do |format|

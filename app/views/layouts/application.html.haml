@@ -7,9 +7,8 @@
     = csrf_meta_tags
     %script{src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCRcbP5XDgjl6ESmSrSDpSNdGwShDgMe8M&sensor=false", type: "text/javascript"}
   %body
-    .navbar.navbar-default
-      .navbar-header
-        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", type: "button"}
-
-  .container
+    .nav
+      .logo-left= link_to 'Citynsider' ,root_path
+      .logo-right Find the right tribe
     = yield
+  / .container

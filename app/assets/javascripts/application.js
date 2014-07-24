@@ -14,3 +14,18 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function(){
+   // $(".keyword").on("click", function(event){
+   //  keyword = $(this).data("keyword");
+   //    event.preventDefault();
+   //    $("#area").append("<p>Ok, let's find the " + keyword + "! Now enter your postcode</p>")
+   //    $("#options").hide();
+   //    console.log("this worked! this is the keyword " + keyword );
+    // });
+   $("#next").on("click", function(event){
+    $("#first").slideToggle();
+    $("#second").show();
+   });
+
+})
