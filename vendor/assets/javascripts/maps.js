@@ -66,7 +66,7 @@ function addMarker(map, position, name, display_address) {
   infoWindow = new google.maps.InfoWindow();
     google.maps.event.addListener(marker, 'click', function() {
       if(infoWindow != undefined) infoWindow.close();
-      infoWindow.setContent("<p>" + name + "<br>" + display_address + "</p>");
+      infoWindow.setContent("<div .info>" + name + "<br>" + display_address + "</div>");
       infoWindow.open(map,marker);
    });
 
@@ -110,7 +110,10 @@ function calcRoute(map, start, end, data) {
       directionsDisplay.setDirections(response);
     }
   });
+
 }
+
+
 
 
 $(document).ready(function() {

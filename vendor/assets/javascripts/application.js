@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function(){
+
+   $("#next").on("click", function(event){
+    $("#first").hide();
+    $("#second").slideToggle();
+   });
+
+   $(".keyword").on("click", function(event){
+    keyword = $(this).data("keyword");
+      $("#second").hide();
+      $("#map_canvas").show();
+      // $("#find").html("Great! Let's find the " + keyword + "! The map can take a few seconds to load.")
+      console.log("this worked! this is the keyword " + keyword );
+    });
+
+})
