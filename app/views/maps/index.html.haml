@@ -9,6 +9,8 @@
       .btn.btn-default#next Next
     %br
 
+  #find.italic
+
   %span#second
     #area
     Do you want to hang out with 
@@ -52,7 +54,7 @@
       :javascript
         var businesses_info = window.locations = #{result_coords(@places).to_json};
 
-    #map_canvas
+#map_canvas
 
            
   /     #searchbox 

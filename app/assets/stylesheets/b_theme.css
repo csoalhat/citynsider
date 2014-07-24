@@ -6468,9 +6468,14 @@ a.hover {
   font-family: Helvetica, sans-serif;
   font-size: 1.2em;
   color: #6e6e6e;
-  padding-left: 60px;
-  padding-right: 60px;
+  margin-right: 40px;
   font-weight: lighter;
+  margin-bottom: 20px;
 }
 
+#find {
+  font-size: 0.9em;
+  font-weight: italic;
+  margin-bottom: 20px;
+}
 

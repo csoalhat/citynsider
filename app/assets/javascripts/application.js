@@ -16,16 +16,17 @@
 //= require_tree .
 
 $(document).ready(function(){
-   // $(".keyword").on("click", function(event){
-   //  keyword = $(this).data("keyword");
-   //    event.preventDefault();
-   //    $("#area").append("<p>Ok, let's find the " + keyword + "! Now enter your postcode</p>")
-   //    $("#options").hide();
-   //    console.log("this worked! this is the keyword " + keyword );
-    // });
+
    $("#next").on("click", function(event){
-    $("#first").slideToggle();
-    $("#second").show();
+    $("#first").hide();
+    $("#second").slideToggle();
    });
+
+   $(".keyword").on("click", function(event){
+    keyword = $(this).data("keyword");
+      $("#second").hide();
+      $("#find").html("Great! Let's find the " + keyword + "! The map can take a few seconds to load.")
+      console.log("this worked! this is the keyword " + keyword );
+    });
 
 })
