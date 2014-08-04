@@ -10,6 +10,7 @@ function initialise(data) {
   var mapOptions = {
     center: new google.maps.LatLng(51.5, -0.1),
     zoom: 15,
+    strokeColor: "#49b8d4",
     styles: [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#acbcc9'}]},{'featureType':'landscape','stylers':[{'color':'#f2e5d4'}]},{'featureType':'road.highway','elementType':'geometry','stylers':[{'color':'#c5c6c6'}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#e4d7c6'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#fbfaf7'}]},{'featureType':'poi.park','elementType':'geometry','stylers':[{'color':'#c5dac6'}]},{'featureType':'administrative','stylers':[{'visibility':'on'},{'lightness':33}]},{'featureType':'road'},{'featureType':'poi.park','elementType':'labels','stylers':[{'visibility':'on'},{'lightness':20}]},{},{'featureType':'road','stylers':[{'lightness':20}]}]
   };
 
@@ -52,8 +53,8 @@ function setupEventHandlers() {
 
 function addMarker(map, position, name, display_address) {
   var icon = new google.maps.MarkerImage(
-    "http://i.imgur.com/8WBxH7T.png", //url
-    new google.maps.Size(29, 50), //size
+    "http://i.imgur.com/N2ZEY5i.png", //url
+    new google.maps.Size(32, 32), //size
     new google.maps.Point(0,0) //origin
   );
 
@@ -89,7 +90,7 @@ function calcRoute(map, start, end, data) {
   var waypts = [];
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(map);
-  directionsDisplay.setOptions( { suppressMarkers: true } );
+  directionsDisplay.setOptions( { suppressMarkers: true, strokeColor: '#49b8d4' } );
 
   for (var i = 0; i < data.length; i++) {
     var location = data[i].address.lat + "," + data[i].address.lng;
@@ -103,7 +104,7 @@ function calcRoute(map, start, end, data) {
       destination: end,
       waypoints: waypts,
       optimizeWaypoints: true,
-      travelMode: google.maps.TravelMode.WALKING
+      travelMode: google.maps.TravelMode.WALKING,
   };
   directionsService.route(request, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
