@@ -7,15 +7,14 @@ class MapsController < ApplicationController
   # GET /maps
   # GET /maps.json
   def index
-
+    # runs yelp api with location and keywords picked by user
     if params[:location] && params[:keyword]
       @places = Yelp.client.search(params[:location], { term: params[:keyword], filter_radius: 0.03, limit: 6})
-      @flickr = flickr.photos.getRecent{tags = "hipster", lat = 51.684477 , lon = -0.021973 }
+      # @flickr = flickr.photos.getRecent{term: params[:keyword], params[:location] }
     end
     respond_to do |format|
       format.html
       format.json { render json: @places ? result_coords(@places) : [] }
-      # format.json { render json: @flickr }
     end
   end
 

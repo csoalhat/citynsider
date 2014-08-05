@@ -15,13 +15,16 @@
 //= require bootstrap
 //= require_tree .
 
-$(document).ready(function(){
 
+
+$(document).ready(function(){
+  // js for next button with slideToggle for location
    $("#next").on("click", function(event){
     $("#first").hide();
     $("#second").slideToggle();
    });
 
+   // js for submit button to show map
    $(".keyword").on("click", function(event){
     keyword = $(this).data("keyword");
       $("#second").hide();
