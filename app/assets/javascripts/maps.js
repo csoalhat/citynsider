@@ -2,12 +2,10 @@ function initialise(data) {
 
   if ((typeof data == 'undefined') && (typeof businesses_info == 'undefined')) {
     return false
-  // avoid errors
   }
 
   data = data || businesses_info
 
-  //map options 
   var mapOptions = {
     center: new google.maps.LatLng(51.5, -0.1),
     zoom: 15,
